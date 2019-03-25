@@ -1,5 +1,6 @@
 package com.pgaofeng.common.base;
 
+import com.pgaofeng.common.mvp.Model;
 import com.pgaofeng.common.mvp.Presenter;
 import com.pgaofeng.common.mvp.View;
 
@@ -8,11 +9,13 @@ import com.pgaofeng.common.mvp.View;
  * @date 2019/3/25
  * @description : 基础Presenter
  */
-public class BasePresenter<V extends View> implements Presenter {
+public abstract class BasePresenter<V extends View, M extends Model> implements Presenter {
     protected V mView;
+    protected M mModel;
 
     public BasePresenter(V view) {
         mView = view;
+        mModel = createModel();
     }
 
     @Override
@@ -24,4 +27,11 @@ public class BasePresenter<V extends View> implements Presenter {
     public boolean isAttach() {
         return mView != null;
     }
+
+    /**
+     * 创建Presenter对应的Model
+     *
+     * @return Model
+     */
+    protected abstract M createModel();
 }

@@ -1,11 +1,16 @@
 package com.pgaofeng.basemvp.main.contract;
 
+import android.os.Handler;
+
+import com.pgaofeng.common.callback.ModelCallBack;
+
+
 /**
  * @author gaofengpeng
  * @date 2019/3/25
- * @description : 主界面的契约接口
+ * @description : 主界面的契约接口，用于整合View，Presenter和Model
  */
-public interface Contract {
+public interface MainContract {
     interface View {
         /**
          * 更新TextView的text
@@ -27,5 +32,16 @@ public interface Contract {
          * 更新TextView的内容
          */
         void updateTextViewText();
+    }
+
+    interface Model {
+        /**
+         * 获取TextView 的内容
+         *
+         * @param param    请求参数
+         * @param callBack 请求回调
+         * @param handler  用于更新主线程UI
+         */
+        void getTextString(String param, ModelCallBack callBack, Handler handler);
     }
 }

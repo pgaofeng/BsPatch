@@ -1,11 +1,13 @@
 package com.pgaofeng.common.base;
 
-import android.app.ProgressDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ProgressBar;
 
+import com.pgaofeng.common.dialog.DialogUtils;
 import com.pgaofeng.common.mvp.Presenter;
 import com.pgaofeng.common.mvp.View;
 
@@ -16,7 +18,8 @@ import com.pgaofeng.common.mvp.View;
  */
 public abstract class BaseActivity<P extends Presenter> extends AppCompatActivity implements View {
     protected P mPresenter;
-    private ProgressDialog mProgressDialog;
+    protected Context mContext;
+    private Dialog mProgressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,7 +27,8 @@ public abstract class BaseActivity<P extends Presenter> extends AppCompatActivit
         setContentView(getContentView());
         mPresenter = createPresenter();
         initView();
-        mProgressDialog = new ProgressDialog(this);
+        mContext = this;
+        mProgressDialog = DialogUtils.getDefaultDialog(mContext);
 
         new ProgressBar(this);
     }
@@ -37,12 +41,16 @@ public abstract class BaseActivity<P extends Presenter> extends AppCompatActivit
 
     @Override
     public void showProgress() {
-        mProgressDialog.show();
+        if (mProgressDialog != null && !mProgressDialog.isShowing()) {
+            mProgressDialog.show();
+        }
     }
 
     @Override
     public void hideProgress() {
-        mProgressDialog.hide();
+        if (mProgressDialog.isShowing() && mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
     }
 
     /**
