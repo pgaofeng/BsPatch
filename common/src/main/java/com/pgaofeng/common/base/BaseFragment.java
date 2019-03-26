@@ -1,5 +1,7 @@
 package com.pgaofeng.common.base;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.pgaofeng.common.dialog.DialogUtils;
 import com.pgaofeng.common.mvp.Presenter;
 
 /**
@@ -18,6 +21,8 @@ import com.pgaofeng.common.mvp.Presenter;
 public abstract class BaseFragment<P extends Presenter> extends Fragment implements com.pgaofeng.common.mvp.View {
 
     protected P mPresenter;
+    private Dialog mDialog;
+    protected Context mContext;
 
     @Nullable
     @Override
@@ -25,6 +30,8 @@ public abstract class BaseFragment<P extends Presenter> extends Fragment impleme
         View view = inflater.inflate(getContentView(), container, false);
         initView(view);
         mPresenter = createPresenter();
+        mContext = getContext();
+        mDialog = DialogUtils.getDefaultDialog(mContext);
         return view;
     }
 
@@ -36,12 +43,16 @@ public abstract class BaseFragment<P extends Presenter> extends Fragment impleme
 
     @Override
     public void showProgress() {
-
+        if (mDialog != null && !mDialog.isShowing()) {
+            mDialog.show();
+        }
     }
 
     @Override
     public void hideProgress() {
-
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
     }
 
     /**
