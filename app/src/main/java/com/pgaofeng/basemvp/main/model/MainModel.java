@@ -4,9 +4,14 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.pgaofeng.basemvp.main.contract.MainContract;
+import com.pgaofeng.basemvp.service.MainService;
 import com.pgaofeng.common.base.BaseModel;
 import com.pgaofeng.common.bean.BaseData;
 import com.pgaofeng.common.callback.ModelCallBack;
+import com.pgaofeng.common.network.RetrofitClient;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 
 /**
@@ -17,6 +22,34 @@ import com.pgaofeng.common.callback.ModelCallBack;
 public class MainModel extends BaseModel implements MainContract.Model {
     @Override
     public void getTextString(final String param, final ModelCallBack callBack, Handler handler) {
+
+        RetrofitClient.getInstance()
+                .createService(MainService.class)
+                .getTextViewText(param)
+                .compose(switchThread())
+                .subscribe(new Observer<BaseData<String>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(BaseData<String> stringBaseData) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
         if (callBack == null) {
             throw new RuntimeException("回调不应为空");
         }
