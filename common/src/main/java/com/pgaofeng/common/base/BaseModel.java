@@ -1,6 +1,7 @@
 package com.pgaofeng.common.base;
 
 import com.pgaofeng.common.mvp.Model;
+import com.pgaofeng.common.network.DisposableManager;
 
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -12,6 +13,12 @@ import io.reactivex.schedulers.Schedulers;
  * @description : 基础Model
  */
 public class BaseModel implements Model {
+
+    protected DisposableManager mDisposableManager;
+
+    public BaseModel() {
+        this.mDisposableManager = new DisposableManager();
+    }
 
     /**
      * 数据请求切换线程，io线程请求数据，请求完后在主线程进行操作
