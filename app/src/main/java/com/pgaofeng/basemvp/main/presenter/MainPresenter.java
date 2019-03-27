@@ -16,7 +16,7 @@ import java.util.Random;
 /**
  * @author gaofengpeng
  * @date 2019/3/25
- * @description :
+ * @description :主界面的主持类，主要作用是将Model获取的数据进行一系列的处理，然后通知View更新界面
  */
 public class MainPresenter extends BasePresenter<MainActivity, MainModel> implements MainContract.Presenter {
     public MainPresenter(MainActivity view, Handler handler) {
@@ -40,9 +40,11 @@ public class MainPresenter extends BasePresenter<MainActivity, MainModel> implem
 
         // 模拟获取数据的几种状态，这里通过参数来决定是否获取数据成功
         int index = random.nextInt(3);
+
         mModel.getTextString(params[index], new ModelCallBack<String>() {
             @Override
             public void success(BaseData<String> baseData) {
+                checkAttach();
                 String s = baseData.getData();
                 if (!TextUtils.isEmpty(s)) {
                     mView.updateText(baseData.getData());
@@ -53,6 +55,7 @@ public class MainPresenter extends BasePresenter<MainActivity, MainModel> implem
 
             @Override
             public void fail(BaseData<String> baseData) {
+                checkAttach();
                 mView.showToast(baseData.getMessage());
                 mView.hideProgress();
                 Toast.makeText(mView, baseData.getMessage(), Toast.LENGTH_SHORT).show();
@@ -60,6 +63,7 @@ public class MainPresenter extends BasePresenter<MainActivity, MainModel> implem
 
             @Override
             public void error(BaseData<String> baseData) {
+                checkAttach();
                 mView.showToast(baseData.getMessage());
                 mView.hideProgress();
             }

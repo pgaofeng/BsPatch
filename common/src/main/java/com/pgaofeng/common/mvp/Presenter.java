@@ -17,4 +17,9 @@ public interface Presenter {
      * @return true为已建立连接
      */
     boolean isAttach();
+
+    /**
+     * 检查是否与View建立连接
+     */
+    void checkAttach();
 }

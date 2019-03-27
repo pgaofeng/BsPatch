@@ -28,6 +28,13 @@ public abstract class BasePresenter<V extends View, M extends Model> implements 
         return mView != null;
     }
 
+    @Override
+    public void checkAttach() {
+        if (!isAttach()){
+            throw new RuntimeException("当前Presenter未与View建立连接");
+        }
+    }
+
     /**
      * 创建Presenter对应的Model
      *

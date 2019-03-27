@@ -14,7 +14,7 @@ import com.pgaofeng.common.base.BaseActivity;
 /**
  * @author gaofengpeng
  * @date 2019/3/25
- * @description :
+ * @description :View界面，只负责显示。逻辑处理由Presenter负责。
  */
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
 

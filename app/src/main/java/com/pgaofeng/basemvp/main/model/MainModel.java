@@ -12,14 +12,14 @@ import com.pgaofeng.common.callback.ModelCallBack;
 /**
  * @author gaofengpeng
  * @date 2019/3/25
- * @description :
+ * @description :主界面的Model层，用于提供获取数据，主要作用是将获取到的数据转换成对象后通过回调交由Presenter
  */
 public class MainModel extends BaseModel implements MainContract.Model {
     @Override
     public void getTextString(final String param, final ModelCallBack callBack, Handler handler) {
-        if (callBack == null)
+        if (callBack == null) {
             throw new RuntimeException("回调不应为空");
-
+        }
         new Thread(() -> {
             try {
                 // 模拟在子线程中获取数据
