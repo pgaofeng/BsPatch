@@ -3,6 +3,7 @@ package com.pgaofeng.common.base;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ProgressBar;
@@ -29,8 +30,6 @@ public abstract class BaseActivity<P extends Presenter> extends AppCompatActivit
         initView();
         mContext = this;
         mProgressDialog = DialogUtils.getDefaultDialog(mContext);
-
-        new ProgressBar(this);
     }
 
     @Override
@@ -58,7 +57,7 @@ public abstract class BaseActivity<P extends Presenter> extends AppCompatActivit
      *
      * @return 布局文件id
      */
-    protected abstract int getContentView();
+    protected abstract @LayoutRes int getContentView();
 
     /**
      * View的初始化工作

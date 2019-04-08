@@ -32,4 +32,9 @@ public class BaseModel implements Model {
                 upstream.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
     }
+
+    @Override
+    public void removeDisposable() {
+        mDisposableManager.clearDisposable();
+    }
 }

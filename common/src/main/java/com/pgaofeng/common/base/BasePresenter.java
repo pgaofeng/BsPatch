@@ -21,6 +21,7 @@ public abstract class BasePresenter<V extends View, M extends Model> implements 
     @Override
     public void detach() {
         mView = null;
+        mModel.removeDisposable();
     }
 
     @Override

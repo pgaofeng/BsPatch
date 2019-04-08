@@ -1,6 +1,4 @@
-package com.pgaofeng.common.network;
-
-import java.util.concurrent.TimeUnit;
+package com.pgaofeng.basemvp.network;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -49,27 +47,14 @@ public class RetrofitClient {
      */
     private void init() {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
-                .readTimeout(NetWorkConstants.READ_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(NetWorkConstants.WRITE_TIMEOUT, TimeUnit.SECONDS)
-                .connectTimeout(NetWorkConstants.CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true);
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create());
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("http://www.example.com");
 
-        initBuilder(clientBuilder, retrofitBuilder);
         mRetrofit = retrofitBuilder.client(clientBuilder.build()).build();
     }
-
-    /**
-     * 对OkHttp和Retrofit做基本的初始化
-     *
-     * @param clientBuilder   OkHttpClient.Builder
-     * @param retrofitBuilder Retrofit.Builder
-     */
-    public void initBuilder(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-    }
-
 
     /**
      * 产生对应的Service

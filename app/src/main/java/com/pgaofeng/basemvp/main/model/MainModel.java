@@ -3,13 +3,12 @@ package com.pgaofeng.basemvp.main.model;
 import android.os.Handler;
 
 import com.pgaofeng.basemvp.main.contract.MainContract;
+import com.pgaofeng.basemvp.network.RetrofitClient;
 import com.pgaofeng.basemvp.service.MainService;
 import com.pgaofeng.common.base.BaseModel;
 import com.pgaofeng.common.bean.BaseData;
 import com.pgaofeng.common.callback.ModelCallBack;
 import com.pgaofeng.common.network.BaseObserver;
-import com.pgaofeng.common.network.DisposableManager;
-import com.pgaofeng.common.network.RetrofitClient;
 
 
 /**
@@ -19,25 +18,41 @@ import com.pgaofeng.common.network.RetrofitClient;
  */
 public class MainModel extends BaseModel implements MainContract.Model {
     @Override
-    public void getTextString(String param, ModelCallBack callBack, Handler handler) {
+    public void getTextString(String param, ModelCallBack callBack) {
+
         RetrofitClient.getInstance()
                 .createService(MainService.class)
                 .getTextViewText(param)
                 .compose(switchThread())
-                .subscribe(new BaseObserver<String>(mDisposableManager) {
+                .subscribe(new BaseObserver<BaseData<String>>(mDisposableManager) {
                     @Override
-                    protected void success(BaseData<String> baseData) {
-                        callBack.success(baseData);
+                    public void onNext(BaseData<String> stringBaseData) {
+                        callBack.success(stringBaseData);
                     }
 
                     @Override
-                    protected void fail(BaseData<String> baseData) {
-                        callBack.success(baseData);
+                    public void onError(Throwable e) {
+                        //callBack.fail(e);
+
+                        /*
+                         * 由于请求的链接并不存在，这里将模拟各种情况
+                         * 并且又加入2秒延迟代表请求的过程
+                         */
+                        new Handler().postDelayed(() -> {
+                            if ("success".equals(param)) {
+                                BaseData<String> baseData = new BaseData<>();
+                                baseData.setMessage("获取数据成功！");
+                                baseData.setData("我是获取的数据");
+                                callBack.success(baseData);
+                            } else {
+                                callBack.fail(e);
+                            }
+                        }, 2000);
+
                     }
 
                     @Override
-                    protected void error(BaseData<String> baseData) {
-                        callBack.success(baseData);
+                    public void onComplete() {
                     }
                 });
     }

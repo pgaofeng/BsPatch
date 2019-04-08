@@ -40,8 +40,7 @@ public interface MainContract {
          *
          * @param param    请求参数
          * @param callBack 请求回调
-         * @param handler  用于更新主线程UI
          */
-        void getTextString(String param, ModelCallBack callBack, Handler handler);
+        void getTextString(String param, ModelCallBack callBack);
     }
 }

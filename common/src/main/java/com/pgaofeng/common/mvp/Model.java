@@ -14,4 +14,9 @@ public interface Model {
      * @return ObservableTransformer
      */
     <T> ObservableTransformer<T, T> switchThread();
+
+    /**
+     * 移除所有网络请求
+     */
+    void removeDisposable();
 }

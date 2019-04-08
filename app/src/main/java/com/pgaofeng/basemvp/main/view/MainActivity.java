@@ -31,6 +31,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     protected void initView() {
         mTextView = findViewById(R.id.tv_myText);
         mButton = findViewById(R.id.btn_update);
+        // 示例，通过点击按钮请求http://www.example.com/api?id=success
+        // 该请求为假请求，访问不通，这里只是模拟
         mButton.setOnClickListener(v -> {
             mPresenter.updateTextViewText();
         });
@@ -38,7 +40,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     protected MainPresenter createPresenter() {
-        return new MainPresenter(this,new Handler());
+        return new MainPresenter(this);
     }
 
     @Override
