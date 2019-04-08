@@ -1,6 +1,4 @@
-package com.pgaofeng.basemvp.main.contract;
-
-import android.os.Handler;
+package com.pgaofeng.basemvp.main;
 
 import com.pgaofeng.common.callback.ModelCallBack;
 

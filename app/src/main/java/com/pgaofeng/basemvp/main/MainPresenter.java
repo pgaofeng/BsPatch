@@ -1,11 +1,8 @@
-package com.pgaofeng.basemvp.main.presenter;
+package com.pgaofeng.basemvp.main;
 
 import android.text.TextUtils;
 
 import com.google.gson.JsonParseException;
-import com.pgaofeng.basemvp.main.contract.MainContract;
-import com.pgaofeng.basemvp.main.model.MainModel;
-import com.pgaofeng.basemvp.main.view.MainActivity;
 import com.pgaofeng.common.base.BasePresenter;
 import com.pgaofeng.common.bean.BaseData;
 import com.pgaofeng.common.callback.ModelCallBack;
@@ -20,7 +17,7 @@ import retrofit2.HttpException;
  * @description :主界面的主持类，主要作用是将Model获取的数据进行一系列的处理，然后通知View更新界面
  */
 public class MainPresenter extends BasePresenter<MainActivity, MainModel> implements MainContract.Presenter {
-    public MainPresenter(MainActivity view) {
+    MainPresenter(MainActivity view) {
         super(view);
     }
 
@@ -57,7 +54,7 @@ public class MainPresenter extends BasePresenter<MainActivity, MainModel> implem
                     public void fail(Throwable throwable) {
                         checkAttach();
                         // 检查错误信息，该部分可放到BaseObserver中
-                        String errorMsg = "";
+                        String errorMsg ;
                         if (throwable instanceof JsonParseException) {
                             errorMsg = "Json解析失败！";
                         } else if (throwable instanceof HttpException) {

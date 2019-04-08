@@ -1,13 +1,10 @@
-package com.pgaofeng.basemvp.main.view;
+package com.pgaofeng.basemvp.main;
 
-import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pgaofeng.basemvp.R;
-import com.pgaofeng.basemvp.main.contract.MainContract;
-import com.pgaofeng.basemvp.main.presenter.MainPresenter;
 import com.pgaofeng.common.base.BaseActivity;
 
 
@@ -33,9 +30,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mButton = findViewById(R.id.btn_update);
         // 示例，通过点击按钮请求http://www.example.com/api?id=success
         // 该请求为假请求，访问不通，这里只是模拟
-        mButton.setOnClickListener(v -> {
-            mPresenter.updateTextViewText();
-        });
+        mButton.setOnClickListener(v ->
+                mPresenter.updateTextViewText()
+        );
     }
 
     @Override

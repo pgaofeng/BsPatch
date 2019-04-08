@@ -1,8 +1,7 @@
-package com.pgaofeng.basemvp.main.model;
+package com.pgaofeng.basemvp.main;
 
 import android.os.Handler;
 
-import com.pgaofeng.basemvp.main.contract.MainContract;
 import com.pgaofeng.basemvp.network.RetrofitClient;
 import com.pgaofeng.basemvp.service.MainService;
 import com.pgaofeng.common.base.BaseModel;
@@ -35,8 +34,9 @@ public class MainModel extends BaseModel implements MainContract.Model {
                         //callBack.fail(e);
 
                         /*
-                         * 由于请求的链接并不存在，这里将模拟各种情况
-                         * 并且又加入2秒延迟代表请求的过程
+                         * 由于请求的链接并不存在，最终的结果将会返回到onError这里
+                         * 因此，这里将模拟成功和失败的情况
+                         * 另外又加入2秒延迟代表请求的过程
                          */
                         new Handler().postDelayed(() -> {
                             if ("success".equals(param)) {
