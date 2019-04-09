@@ -17,6 +17,7 @@ public class DisposableManager {
 
     /**
      * 将请求对象添加进来，用于统一管理
+     *
      * @param disposable 具体请求
      */
     public void addDisposable(Disposable disposable) {

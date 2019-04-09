@@ -24,18 +24,19 @@ public class MainModel extends BaseModel implements MainContract.Model {
                 .getTextViewText(param)
                 .compose(switchThread())
                 .subscribe(new BaseObserver<BaseData<String>>(mDisposableManager) {
+
                     @Override
-                    public void onNext(BaseData<String> stringBaseData) {
+                    public void onSuccess(BaseData<String> stringBaseData) {
                         callBack.success(stringBaseData);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onFail(Throwable throwable) {
                         //callBack.fail(e);
 
                         /*
-                         * 由于请求的链接并不存在，最终的结果将会返回到onError这里
-                         * 因此，这里将模拟成功和失败的情况
+                         * 由于请求的链接并不存在，最终的结果将会返回到onFail这里
+                         * 因此，将会在这里模拟成功和失败的情况
                          * 另外又加入2秒延迟代表请求的过程
                          */
                         new Handler().postDelayed(() -> {
@@ -45,14 +46,9 @@ public class MainModel extends BaseModel implements MainContract.Model {
                                 baseData.setData("我是获取的数据");
                                 callBack.success(baseData);
                             } else {
-                                callBack.fail(e);
+                                callBack.fail(throwable);
                             }
                         }, 2000);
-
-                    }
-
-                    @Override
-                    public void onComplete() {
                     }
                 });
     }
