@@ -2,7 +2,6 @@ package com.pgaofeng.basemvp.main.presenter;
 
 import android.os.Handler;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.pgaofeng.basemvp.main.contract.MainContract;
 import com.pgaofeng.basemvp.main.model.MainModel;
@@ -24,7 +23,7 @@ public class MainPresenter extends BasePresenter<MainActivity, MainModel> implem
         this.mHandler = handler;
     }
 
-    private String[] params = {"success", "fail", "error"};
+    private String[] params = {"success", "fail"};
     private Handler mHandler;
     private Random random = new Random(System.currentTimeMillis());
 
@@ -33,38 +32,30 @@ public class MainPresenter extends BasePresenter<MainActivity, MainModel> implem
         return new MainModel();
     }
 
-
     @Override
     public void updateTextViewText() {
         mView.showProgress();
 
         // 模拟获取数据的几种状态，这里通过参数来决定是否获取数据成功
-        int index = random.nextInt(3);
+        int index = random.nextInt(2);
 
-        mModel.getTextString(params[index], new ModelCallBack<String>() {
+        mModel.getTextString(params[index], new ModelCallBack() {
             @Override
-            public void success(BaseData<String> baseData) {
+            public void success(BaseData<?> baseData) {
                 checkAttach();
-                String s = baseData.getData();
+                String s = (String) baseData.getData();
                 if (!TextUtils.isEmpty(s)) {
-                    mView.updateText(baseData.getData());
+                    mView.updateText(s);
                 }
                 mView.hideProgress();
                 mView.showToast(baseData.getMessage());
             }
 
             @Override
-            public void fail(BaseData<String> baseData) {
-                checkAttach();
-                mView.showToast(baseData.getMessage());
-                mView.hideProgress();
-                Toast.makeText(mView, baseData.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+            public void fail(Throwable throwable) {
 
-            @Override
-            public void error(BaseData<String> baseData) {
                 checkAttach();
-                mView.showToast(baseData.getMessage());
+                mView.showToast("获取数据失败！");
                 mView.hideProgress();
             }
         }, mHandler);

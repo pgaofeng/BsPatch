@@ -35,23 +35,12 @@ public class MainModel extends BaseModel implements MainContract.Model {
                             callBack.success(baseData);
                             break;
                         case "fail":
-                            baseData.setCode(1);
-                            baseData.setMessage("获取失败");
-                            baseData.setData(null);
-                            callBack.fail(baseData);
-                            Log.i("MainPresenter", "getTextString: Fail");
-                            break;
-                        case "error":
-                            baseData.setCode(2);
-                            baseData.setMessage("出错了");
-                            baseData.setData(null);
-                            callBack.error(baseData);
+                            callBack.fail(new RuntimeException("人为异常！"));
                             break;
                         default:
                             break;
                     }
                 });
-
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
