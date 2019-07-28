@@ -34,7 +34,8 @@ public abstract class BaseActivity<P extends Presenter> extends AppCompatActivit
 
     @Override
     protected void onDestroy() {
-        mPresenter.detach();
+        if (mPresenter != null)
+            mPresenter.detach();
         super.onDestroy();
     }
 
@@ -57,7 +58,8 @@ public abstract class BaseActivity<P extends Presenter> extends AppCompatActivit
      *
      * @return 布局文件id
      */
-    protected abstract @LayoutRes int getContentView();
+    protected abstract @LayoutRes
+    int getContentView();
 
     /**
      * View的初始化工作
