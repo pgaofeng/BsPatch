@@ -33,7 +33,7 @@ public class DisposableManager {
      * 移除所有的请求并结束
      */
     public void clearDisposable() {
-        if (mCompositeDisposable.isDisposed()) {
+        if (mCompositeDisposable == null || mCompositeDisposable.isDisposed()) {
             return;
         }
         mCompositeDisposable.clear();
