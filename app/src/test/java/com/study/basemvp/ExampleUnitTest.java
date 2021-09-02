@@ -1,4 +1,4 @@
-package com.pgaofeng.basemvp;
+package com.study.basemvp;
 
 import org.junit.Test;
 

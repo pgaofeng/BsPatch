@@ -1,4 +1,4 @@
-package com.pgaofeng.basemvp.main;
+package com.study.bspatch.main;
 
 
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.pgaofeng.basemvp.R;
+import com.study.basemvp.R;
 
 /**
  * @author gaofengpeng
