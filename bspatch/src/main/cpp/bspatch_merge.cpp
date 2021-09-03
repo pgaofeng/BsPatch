@@ -8,8 +8,8 @@ extern int patch_main(int argc, char *argv[]);
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_study_bspatch_NativeLib_bsPatch(JNIEnv *env, jobject thiz, jstring new_file,
-                                         jstring old_file, jstring patch_file) {
+Java_com_study_bspatch_PatchUtils_bsPatch(JNIEnv *env, jobject thiz, jstring new_file,
+                                          jstring old_file, jstring patch_file) {
     const char *newFile = env->GetStringUTFChars(new_file, nullptr);
     const char *oldFile = env->GetStringUTFChars(old_file, nullptr);
     const char *patchFile = env->GetStringUTFChars(patch_file, nullptr);

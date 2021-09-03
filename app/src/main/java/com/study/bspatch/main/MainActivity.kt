@@ -1,23 +1,32 @@
-package com.study.bspatch.main;
+package com.study.bspatch.main
 
-
-import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.study.basemvp.R;
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.study.basemvp.R
+import com.study.bspatch.PatchUtils
 
 /**
  * @author gaofengpeng
- * @date 2019/3/25
- * @description :View界面，只负责显示。逻辑处理由Presenter负责。
+ * @date 20121/9/3
  */
-public class MainActivity extends AppCompatActivity {
+class MainActivity : AppCompatActivity() {
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    private lateinit var mTvText: TextView
+    private lateinit var mButton: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        mTvText = findViewById(R.id.tv_myText)
+        mButton = findViewById(R.id.btn_update)
+        init()
+    }
+
+    private fun init() {
+        mButton.setOnClickListener {
+            mTvText.text = PatchUtils.md5sum(applicationInfo.sourceDir)
+        }
     }
 }
