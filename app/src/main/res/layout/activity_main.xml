@@ -4,18 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.study.bspatch.main.MainActivity">
+    tools:context="com.study.bspatch.main.MainActivity"
+    tools:ignore="HardcodedText">
 
     <TextView
         android:id="@+id/tv_myText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_margin="20dp"
+        android:text="请确保差分文件放在了Android/data/com.study.bspatch/cache目录" />
 
     <Button
         android:id="@+id/btn_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="更新" />
+
+    <Button
+        android:id="@+id/btn_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="按钮" />
 
 </LinearLayout>

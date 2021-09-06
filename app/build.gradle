@@ -6,15 +6,29 @@ plugins {
 android {
     compileSdkVersion 30
     defaultConfig {
-        applicationId "com.pgaofeng.basemvp"
+        applicationId "com.study.bspatch"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        signAll {
+            storeFile file("./sign.jks")
+            storePassword "admin123456"
+            keyAlias "bapatch"
+            keyPassword "admin123456"
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.signAll
+        }
         release {
+            signingConfig signingConfigs.signAll
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -39,6 +53,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    implementation'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
     implementation 'androidx.activity:activity-ktx:1.3.1'
 }
