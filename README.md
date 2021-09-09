@@ -10,3 +10,5 @@
 4. 将`patch`复制到`Android/data/com.study.bspatch/cache`目录
 5. 运行旧版本，点击更新即可生成新包`output.apk`
 
+详情参见[在Android中使用Bsdiff实现增量更新](https://juejin.cn/post/7004809959724548132)
+
