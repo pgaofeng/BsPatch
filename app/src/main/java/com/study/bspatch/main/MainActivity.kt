@@ -44,6 +44,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         mButton.setOnClickListener {
+            val patchFile = File("$externalCacheDir/patch")
+            if (!patchFile.exists()) {
+                mTvText.text = "未找到分包文件patch，请将其放在{$externalCacheDir}目录下"
+                return@setOnClickListener
+            }
+
             lifecycleScope.launch {
                 mTvText.text = "开始合并安装包..."
                 val last = System.currentTimeMillis()
