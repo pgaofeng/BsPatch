@@ -4,11 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk 30
-
+    def ext = rootProject.extensions.getByName("ext")
+    compileSdkVersion ext.compileVersion
+    namespace "com.study.bspatch.module"
+    // 根据自己AS下载的ndk版本，可以在sdk的目录下的ndk目录中查看
+    ndkVersion "27.0.12077973"
     defaultConfig {
-        minSdk 24
-        targetSdk 30
+        minSdkVersion ext.minVersion
+        targetSdkVersion ext.targetVersion
 
         externalNativeBuild {
             cmake {
@@ -25,7 +28,8 @@ android {
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
-            version "3.10.2"
+            // 最好和CMakeLists.txt中的版本一致
+            version "3.22.1"
         }
     }
     compileOptions {
